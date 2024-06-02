@@ -12,12 +12,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TaskRepository
     val allTasks: LiveData<List<Task>>
+    private val disposable = CompositeDisposable()
 
     init {
         val taskDao = TaskDatabase.getDatabase(application).taskDao()
@@ -39,5 +42,14 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteAllTasks() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
+    }
+
+    fun getAllTasksRx(): Single<List<Task>> {
+        return repository.getAllTasksRx();
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 }

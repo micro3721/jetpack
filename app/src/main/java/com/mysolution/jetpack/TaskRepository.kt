@@ -9,6 +9,7 @@ package com.mysolution.jetpack;
  * Describe:
  */
 import androidx.lifecycle.LiveData
+import io.reactivex.rxjava3.core.Single
 
 class TaskRepository(private val taskDao: TaskDao) {
     val allTasks: LiveData<List<Task>> = taskDao.getAllTasks()
@@ -31,5 +32,9 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun deleteAll() {
         taskDao.deleteAll()
+    }
+
+    fun getAllTasksRx(): Single<List<Task>> {
+        return taskDao.getAllTasksRx()
     }
 }

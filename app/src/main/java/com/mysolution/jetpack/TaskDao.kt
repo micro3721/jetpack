@@ -15,6 +15,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface TaskDao {
@@ -32,6 +33,9 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_table")
     fun getAllTasks(): LiveData<List<Task>>
+
+    @Query("SELECT * FROM task_table")
+    fun getAllTasksRx(): Single<List<Task>>
 
     @Query("DELETE FROM task_table")
     suspend fun deleteAll()
