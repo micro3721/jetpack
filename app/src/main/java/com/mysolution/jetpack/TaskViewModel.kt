@@ -9,6 +9,7 @@ package com.mysolution.jetpack;
  * Describe:
  */
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -28,7 +29,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         allTasks = repository.allTasks
     }
 
-    fun insert(task: Task) = viewModelScope.launch {
+    fun insert(task: Task): Any = viewModelScope.launch {
         repository.insert(task)
     }
 
@@ -51,5 +52,32 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         disposable.clear()
+    }
+
+    fun insertInitialTasks() {
+        viewModelScope.launch {
+            insert(
+                Task(
+                    name = "Task 1",
+                    description = "Description for Task 1",
+                    isCompleted = false
+                )
+            )
+            insert(
+                Task(
+                    name = "Task 2",
+                    description = "Description for Task 2",
+                    isCompleted = true
+                )
+            )
+            insert(
+                Task(
+                    name = "Task 3",
+                    description = "Description for Task 3",
+                    isCompleted = false
+                )
+            )
+
+        }
     }
 }

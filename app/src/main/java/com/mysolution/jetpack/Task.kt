@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "task_table")
 data class Task(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0, //Default value for id
     val name: String,
     val description: String,
     val isCompleted: Boolean

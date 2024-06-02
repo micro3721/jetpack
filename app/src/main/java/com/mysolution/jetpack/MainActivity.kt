@@ -48,19 +48,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        insertInitialTasks()
+        taskViewModel.insertInitialTasks()
+
 
         // Use RxJava to get tasks
-        disposable.add(
-            taskViewModel.getAllTasksRx()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { tasks ->
-                    // Update UI with tasks
-                    adapter.submitList(tasks)
-                    Log.d("MainActivity", " rxjava:$tasks")
-                }
-        )
+        val queryButton: Button = findViewById(R.id.QueryButton)
+        queryButton.setOnClickListener {
+            disposable.add(
+                taskViewModel.getAllTasksRx()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { tasks ->
+                        // Update UI with tasks
+                        adapter.submitList(tasks)
+                        tasks.forEach { task ->
+                            Log.d(
+                                "TaskViewModel",
+                                "ID:${task.id}, Name: ${task.name}, Description: ${task.description}, Completed: ${task.isCompleted}"
+                            )
+                        }
+                    }
+            )
+        }
         // Example button to clear all tasks
         val clearButton: Button = findViewById(R.id.clearButton)
         clearButton.setOnClickListener {
@@ -73,14 +82,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun insertInitialTasks() {
-        GlobalScope.launch {
-            taskViewModel.insert(Task(0, "Task 1", "Description for Task 1", false))
-            taskViewModel.insert(Task(1, "Task 2", "Description for Task 2", true))
-            taskViewModel.insert(Task(2, "Task 3", "Description for Task 3", false))
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
