@@ -15,4 +15,17 @@ dependencyResolutionManagement {
 
 rootProject.name = "jetpack"
 include(":app")
-include(":module0001")
+
+// 动态包含所有模块
+val moduleDir = file(".")
+fun calculateModuleCount(): Int {
+    val pattern = Regex("^module\\d{4}$")
+    return moduleDir.listFiles()?.count { it.isDirectory && pattern.matches(it.name) } ?: 0
+}
+
+val moduleCount = calculateModuleCount()
+
+for (i in 1..moduleCount) {
+    include(":module%04d".format(i))
+}
+
