@@ -4,40 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/clearButton"
+    <ImageView
+        android:id="@+id/backgroundImageView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Clear All Tasks"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/insertButton"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insert One Task"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clearButton" />
-
-    <Button
-        android:id="@+id/QueryButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Query all Task"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertButton" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:text="子\n模\n块\n单\n独\n编\n译\n运\n行"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QueryButton" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 </androidx.constraintlayout.widget.ConstraintLayout>

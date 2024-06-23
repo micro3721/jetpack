@@ -1,4 +1,4 @@
-package com.mysolution.jetpack;
+package com.mysolution.module0001;
 
 /**
  * Author: github.com/micro3721
@@ -9,7 +9,6 @@ package com.mysolution.jetpack;
  * Describe:
  */
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope

@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jetpack"
 include(":app")
- 
+include(":module0001")
