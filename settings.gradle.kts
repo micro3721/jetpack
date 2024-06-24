@@ -29,3 +29,4 @@ for (i in 1..moduleCount) {
     include(":module%04d".format(i))
 }
 
+include(":module0002")
