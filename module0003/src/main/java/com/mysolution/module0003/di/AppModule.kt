@@ -27,7 +27,7 @@ object AppModule {
     @Provides
     fun provideApiService(): ApiService {
         return Retrofit.Builder()
-            .baseUrl("cvm.ap-guangzhou.tencentcloudapi.com")
+            .baseUrl("https://qq.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
