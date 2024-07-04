@@ -30,3 +30,4 @@ for (i in 1..moduleCount) {
 }
 
 include(":module0002")
+include(":module0003")
