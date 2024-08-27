@@ -33,7 +33,7 @@ class UserAdapter : PagingDataAdapter<User, UserAdapter.UserViewHolder>(UserComp
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User?) {
-            itemView.findViewById<TextView>(R.id.userName).text = user?.name
+            itemView.findViewById<TextView>(R.id.userName).text = user?.login
         }
     }
 

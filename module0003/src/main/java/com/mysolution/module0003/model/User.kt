@@ -9,4 +9,4 @@ package com.mysolution.module0003.model
  * Describe:
  */
 
-data class User(val id: Int, val name: String)
+data class User(val id: Int, val login: String)

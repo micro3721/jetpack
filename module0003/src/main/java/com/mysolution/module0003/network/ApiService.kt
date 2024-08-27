@@ -14,7 +14,8 @@ import retrofit2.http.Query
  * Describe:
  */
 
+//target url is example: https://api.github.com/users?per_page=20&page=1
 interface ApiService {
     @GET("users")
-    suspend fun getUsers(@Query("page") page: Int, @Query("size") size: Int): List<User>
+    suspend fun getUsers(@Query("page") page: Int, @Query("per_page") size: Int): List<User>
 }

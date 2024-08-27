@@ -64,6 +64,7 @@ class UserFragment : Fragment() {
                 Log.d("UserFragment", "Loading data...")
             } else if (refreshState is LoadState.NotLoading && adapter.itemCount > 0) {
                 Log.d("UserFragment", "Data received: ${adapter.itemCount} items")
+                Log.d("UserFragment", "PagingData: ${adapter.snapshot()}")
             } else if (refreshState is LoadState.NotLoading && adapter.itemCount == 0) {
                 Log.d("UserFragment", "No data received")
             } else if (refreshState is LoadState.Error) {

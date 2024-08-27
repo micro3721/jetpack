@@ -1,5 +1,6 @@
 package com.mysolution.module0003.util
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mysolution.module0003.model.User
@@ -19,7 +20,9 @@ class UserPagingSource(private val apiService: ApiService) : PagingSource<Int, U
         return try {
             val page = params.key ?: 1
             val pageSize = params.loadSize
+            Log.d("UserPagingSource", "Loading page: $page with pageSize: $pageSize")
             val response = apiService.getUsers(page, pageSize)
+            Log.d("UserPagingSource", "Received ${response.size} items")
             LoadResult.Page(
                 data = response,
                 prevKey = if (page == 1) null else page - 1,
