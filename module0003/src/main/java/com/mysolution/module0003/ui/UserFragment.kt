@@ -1,17 +1,17 @@
 package com.mysolution.module0003.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mysolution.module0003.R
-import com.mysolution.module0003.repository.UserRepository
 import com.mysolution.module0003.ui.adapter.UserAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -54,6 +54,23 @@ class UserFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.userFlow.collectLatest {
                 adapter.submitData(it)
+            }
+        }
+
+        // Adding LoadStateListener to monitor loading states
+        adapter.addLoadStateListener { loadState ->
+            val refreshState = loadState.source.refresh
+            if (refreshState is LoadState.Loading) {
+                Log.d("UserFragment", "Loading data...")
+            } else if (refreshState is LoadState.NotLoading && adapter.itemCount > 0) {
+                Log.d("UserFragment", "Data received: ${adapter.itemCount} items")
+            } else if (refreshState is LoadState.NotLoading && adapter.itemCount == 0) {
+                Log.d("UserFragment", "No data received")
+            } else if (refreshState is LoadState.Error) {
+                Log.e(
+                    "UserFragment",
+                    "Error loading data: ${(refreshState as LoadState.Error).error}"
+                )
             }
         }
     }
